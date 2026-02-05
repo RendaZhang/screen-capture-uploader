@@ -127,6 +127,60 @@ python capture_upload.py
 
 首次运行时，macOS 可能会提示授权“屏幕录制（Screen Recording）”，请允许对应终端/解释器。
 
+### 5.6 在 Mac 后台运行 Client（nohup + `&`）
+
+如果你希望关闭终端窗口后脚本仍继续运行，可以使用 `nohup`：
+
+```bash
+nohup python capture_upload.py > client.log 2>&1 &
+```
+
+说明：
+
+- `nohup`：终端关闭后进程也不会退出。
+- `> client.log 2>&1`：把标准输出和错误输出都写入日志文件 `client.log`。
+- `&`：让程序在后台运行并立即返回 shell。
+
+启动后可用下面命令查看后台进程：
+
+```bash
+ps -ef | grep capture_upload.py | grep -v grep
+```
+
+也可以直接查看日志确认脚本在工作：
+
+```bash
+tail -f client.log
+```
+
+### 5.7 运行后检查并杀死后台 Client 进程
+
+先查出进程 PID：
+
+```bash
+ps -ef | grep capture_upload.py | grep -v grep
+```
+
+输出中第二列通常是 PID，例如 `12345`。
+
+优雅停止（推荐先尝试）：
+
+```bash
+kill 12345
+```
+
+如果进程仍未退出，再强制结束：
+
+```bash
+kill -9 12345
+```
+
+可再次执行以下命令确认进程已结束（无输出即已停止）：
+
+```bash
+ps -ef | grep capture_upload.py | grep -v grep
+```
+
 ---
 
 ## 6. Server IP 说明（为什么要固定 IP）
