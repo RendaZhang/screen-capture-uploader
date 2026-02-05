@@ -10,7 +10,7 @@ from PIL import ImageGrab
 # =======================
 # 配置参数（可自行修改）
 # =======================
-UPLOAD_URL = "http://192.168.8.102:5000/upload"  # 上传服务器地址
+UPLOAD_URL = "http://192.168.1.22:5000/upload"  # 上传服务器地址
 CAPTURE_INTERVAL = 30  # 每隔多少秒截图一次
 RETRY_INTERVAL = 10  # 上传失败后重试间隔
 MAX_RETRY = 3  # 最大重试次数
